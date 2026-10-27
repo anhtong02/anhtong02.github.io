@@ -4,22 +4,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anh Tong · Data Scientist</title>
+<script>
+  /* Set theme before the page paints so there's no flash.
+     Saved choice wins; otherwise follow the system setting. */
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    var theme = saved || (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* Dark: inky navy with coral, violet, and mint pops */
   :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --border: rgba(255,255,255,0.08);
-    --text: #e8e4dc;
-    --muted: #888880;
-    --accent: #c8b89a;
-    --accent2: #7eb8a4;
+    --bg: #0d0f1f;
+    --surface: #14172b;
+    --border: rgba(255,255,255,0.09);
+    --text: #f4f3ff;
+    --muted: #a5a8c6;
+    --accent: #ff7a59;
+    --accent2: #a594ff;
+    --accent3: #4fe0b0;
+    --highlight: rgba(165,148,255,0.30);
+    --on-accent: #0d0f1f;
+    --nav-bg: rgba(13,15,31,0.85);
+    --hover-bg: #1a1d36;
+    --chip-bg: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.22);
+    --accent-line: rgba(255,122,89,0.40);
+    --accent-wash: rgba(255,122,89,0.08);
+    --accent2-line: rgba(165,148,255,0.40);
+    --accent2-wash: rgba(165,148,255,0.10);
+    --noise-opacity: 0.5;
+    --yt: #ff6b6b;
+    --yt-line: rgba(255,107,107,0.35);
+    --yt-wash: rgba(255,107,107,0.08);
     --mono: 'DM Mono', monospace;
-    --serif: 'DM Serif Display', serif;
+    --serif: 'Fraunces', Georgia, serif;
     --sans: 'Instrument Sans', sans-serif;
+    color-scheme: dark;
+  }
+
+  /* Light: cool bright white with the same pops, deepened for contrast */
+  :root[data-theme="light"] {
+    --bg: #fbfbff;
+    --surface: #f1f0fb;
+    --border: rgba(20,20,60,0.10);
+    --text: #15162b;
+    --muted: #545778;
+    --accent: #c2401b;
+    --accent2: #5a43dc;
+    --accent3: #0a7d5c;
+    --highlight: rgba(255,122,89,0.28);
+    --on-accent: #ffffff;
+    --nav-bg: rgba(251,251,255,0.85);
+    --hover-bg: #ffffff;
+    --chip-bg: rgba(90,67,220,0.07);
+    --border-strong: rgba(20,20,60,0.28);
+    --accent-line: rgba(194,64,27,0.35);
+    --accent-wash: rgba(194,64,27,0.06);
+    --accent2-line: rgba(90,67,220,0.35);
+    --accent2-wash: rgba(90,67,220,0.07);
+    --noise-opacity: 0;
+    --yt: #c0392b;
+    --yt-line: rgba(192,57,43,0.35);
+    --yt-wash: rgba(192,57,43,0.06);
+    color-scheme: light;
+  }
+
+  /* ── FUN DETAILS ── */
+  .hero-title em {
+    background: linear-gradient(transparent 62%, var(--highlight) 62%, var(--highlight) 92%, transparent 92%);
+    padding: 0 0.1em;
+  }
+  .stat-box:nth-child(2)::after { background: var(--accent2) !important; }
+  .stat-box:nth-child(3)::after { background: var(--accent3) !important; }
+  .project-card::before {
+    background: linear-gradient(var(--accent), var(--accent2)) !important;
+  }
+  .metric-val { color: var(--accent3) !important; }
+
+  /* ── READ MORE ── */
+  .more summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--accent2);
+  }
+  .more summary::-webkit-details-marker { display: none; }
+  .more summary:hover { color: var(--accent); }
+  .more summary:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+  .more .when-open { display: none; }
+  .more[open] .when-open { display: inline; }
+  .more[open] .when-closed { display: none; }
+  .more .project-desc { margin-top: 0.75rem; }
+
+  body, nav, .project-card, .stat-box, #projects {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* ── THEME TOGGLE ── */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .theme-toggle {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--accent2);
+    outline-offset: 2px;
   }
 
   html { scroll-behavior: smooth; }
@@ -41,7 +163,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
+    opacity: var(--noise-opacity);
   }
 
   /* ── NAV ── */
@@ -54,7 +176,7 @@
     align-items: center;
     padding: 1.25rem 3rem;
     border-bottom: 1px solid var(--border);
-    background: rgba(10,10,10,0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
   }
 
@@ -160,7 +282,7 @@
 
   .btn-primary {
     background: var(--accent);
-    color: #0a0a0a;
+    color: var(--on-accent);
     border: 1px solid var(--accent);
   }
 
@@ -321,7 +443,7 @@
 
   .tag:hover {
     color: var(--text);
-    border-color: rgba(255,255,255,0.2);
+    border-color: var(--border-strong);
   }
 
   /* ── PROJECTS ── */
@@ -360,7 +482,7 @@
   }
 
   .project-card:hover::before { transform: scaleY(1); }
-  .project-card:hover { background: #111; }
+  .project-card:hover { background: var(--hover-bg); }
 
   .project-num {
     font-family: var(--mono);
@@ -388,7 +510,7 @@
     font-family: var(--mono);
     font-size: 10px;
     color: var(--accent);
-    border: 1px solid rgba(200,184,154,0.3);
+    border: 1px solid var(--accent-line);
     padding: 0.2rem 0.6rem;
     border-radius: 1px;
   }
@@ -427,7 +549,7 @@
     font-family: var(--mono);
     font-size: 10px;
     color: var(--muted);
-    background: rgba(255,255,255,0.04);
+    background: var(--chip-bg);
     padding: 0.25rem 0.6rem;
     border-radius: 1px;
   }
@@ -444,25 +566,25 @@
     letter-spacing: 0.08em;
     color: var(--accent2);
     text-decoration: none;
-    border: 1px solid rgba(126,184,164,0.3);
+    border: 1px solid var(--accent2-line);
     padding: 0.4rem 0.9rem;
     border-radius: 1px;
     transition: all 0.2s;
   }
 
   .proj-link:hover {
-    background: rgba(126,184,164,0.08);
+    background: var(--accent2-wash);
     border-color: var(--accent2);
   }
 
   .proj-link-yt {
-    color: #ff6b6b;
-    border-color: rgba(255,107,107,0.3);
+    color: var(--yt);
+    border-color: var(--yt-line);
   }
 
   .proj-link-yt:hover {
-    background: rgba(255,107,107,0.08);
-    border-color: #ff6b6b;
+    background: var(--yt-wash);
+    border-color: var(--yt);
   }
 
   .project-metrics {
@@ -532,7 +654,7 @@
 
   .contact-link:hover {
     border-color: var(--accent);
-    background: rgba(200,184,154,0.04);
+    background: var(--accent-wash);
   }
 
   .contact-link-label {
@@ -622,12 +744,18 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">AT_</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="./resume-final.pdf" target="_blank" style="color: var(--accent);">Resume</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="./resume-final.pdf" target="_blank" style="color: var(--accent);">Resume</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme">
+      <span id="theme-icon" aria-hidden="true">☀</span>
+      <span id="theme-label">Light</span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -673,11 +801,12 @@
     <h2 class="section-title fade-in">Builder. Problem solver.<br><em style="font-family: var(--serif); font-style: italic; color: var(--accent);">Always finishing.</em></h2>
     <div class="about-grid">
       <div class="about-text fade-in">
-        <p>I'm a recent Data Science graduate from the University of Utah who builds data systems end to end, not just notebooks but layered pipelines with real quality checks, deployed APIs with real latency numbers, and experiment tracking.</p>
-        <p>My projects span <strong>program evaluation</strong> on a validated SQL pipeline, <strong>real-time fraud detection</strong> with Spark Streaming and Feast, <strong>multimodal recommendation</strong> with CLIP and pgvector, and <strong>RAG pipelines</strong> grounded in structured data to prevent hallucination.</p>
-        <p>The part I care most about is whether a number is actually true. Most of my time on the no-show project went into the checks that would catch me being wrong, not the model.</p>
-        <p>Outside of data, I'm a guitarist, singer, and astrophotographer, which is probably why I ended up building a photography recommendation engine as a portfolio project. I spend weekends hiking, shooting the Milky Way, and occasionally playing fingerpicked guitar at inconvenient hours.</p>
-        <p><strong>Open to opportunities nationwide.</strong> Based in Salt Lake City, willing to relocate.</p>
+        <p>I'm a Data Science graduate from the University of Utah. I build data systems end to end: <strong>pipelines</strong> that check their own output, <strong>models</strong> tested on data they haven't seen, and <strong>APIs</strong> that serve them. Before that, I spent a year and a half at Salt Lake County Youth Services, teaching high schoolers everything from probability to money basics.</p>
+        <p><strong>I'm the planner.</strong> When I travel somewhere new with friends who don't travel much, I've already learned the roads before we land, read every hotel review, and thought through what could go wrong so it doesn't. I believe some things are out of anyone's hands. Everything else, I prepare for. I bring that same habit to my work: think through every possibility, use every tool I have, and clear the way for the people counting on me.</p>
+        <p><strong>On a team, I listen first.</strong> Working with teenagers taught me that people do their best work when they feel heard, so I try to leave every conversation a little less stressful than I found it. I'm happy to lead a piece of the work, and just as happy to pick up whatever the team needs.</p>
+        <p><strong>I'm ambitious, and I want to be really good at this.</strong> Not for the title, but because good data work helps real people. I learn something new every day and plan to keep it that way.</p>
+        <p><strong>Outside of work,</strong> I'm a bit of a daredevil. I love traveling, new places, and new challenges. I play guitar, sing, record music onto cassette tapes, and still listen the old-fashioned way. I hike and shoot the Milky Way at inconvenient hours. And I'll happily talk movies for as long as you'll let me: Seven Samurai is my favorite, with No Country for Old Men, The Shining, and Pulp Fiction close behind.</p>
+        <p>Based in Salt Lake City, open to relocating.</p>
       </div>
       <div class="skills-block fade-in">
         <div class="skill-row">
@@ -726,7 +855,12 @@
           </div>
           <h3 class="project-name">Appointment Attendance Evaluation</h3>
           <p class="project-tagline">The reminder texts looked like a failure. They weren't.</p>
-          <p class="project-desc">A clinic's text reminders looked 11 points <em>worse</em> than sending nothing. The reason: the clinic only texts people who book at least 3 days out, and same-day bookers (who can never receive one) almost never miss. They were padding the comparison group. On the eligible group the result reverses to 5 points fewer missed appointments, not 11 more. The pipeline rebuilds from the source CSV in one command across raw, staging, and feature layers, with 16 quality checks that halt the build instead of passing bad data downstream, plus a test suite that corrupts the database 10 different ways to prove each check actually fires. A logistic model then ranks who to call, surfacing no-shows at twice the base rate in the top 5%.</p>
+          <p class="project-desc">A clinic's text reminders looked like they made people miss <em>more</em> appointments. I built a tested data pipeline over 110K appointments to find out why, then a model that flags who's most likely to miss so staff know who to call.</p>
+          <details class="more">
+            <summary><span class="when-closed">Read more ↓</span><span class="when-open">Show less ↑</span></summary>
+            <p class="project-desc">The texts looked 11 points <em>worse</em> than sending nothing. The reason: the clinic only texts people who book at least 3 days out, and same-day bookers (who can never receive one) almost never miss. They were padding the comparison group. On the eligible group the result reverses to 5 points fewer missed appointments, not 11 more.</p>
+            <p class="project-desc">The pipeline rebuilds from the source CSV in one command across raw, staging, and feature layers, with 16 quality checks that halt the build instead of passing bad data downstream, plus a test suite that corrupts the database 10 different ways to prove each check actually fires. A logistic model then ranks who to call, surfacing no-shows at twice the base rate in the top 5%.</p>
+          </details>
           <div class="project-stack">
             <span class="stack-tag">Python</span>
             <span class="stack-tag">DuckDB</span>
@@ -764,7 +898,11 @@
           </div>
           <h3 class="project-name">Apateur</h3>
           <p class="project-tagline">For the amateur behind the aperture.</p>
-          <p class="project-desc">Upload a reference photo and your camera gear, and Apateur finds visually similar real-photographer shots, returns the settings distributions they actually used (f-stops, ISO, shutter speed), ranks your lenses for that shot type, and recommends what to buy next. RAG-grounded explanations powered by a local Llama 3.2 model prevent hallucinated lens specs.</p>
+          <p class="project-desc">Upload a photo you love and the camera gear you own. Apateur finds similar shots by real photographers, shows the settings they used, and tells you which of your lenses fits best.</p>
+          <details class="more">
+            <summary><span class="when-closed">Read more ↓</span><span class="when-open">Show less ↑</span></summary>
+            <p class="project-desc">Visual search runs on CLIP embeddings over 22k photos stored in PostgreSQL with pgvector. For each match it returns the settings distributions real photographers actually used (f-stops, ISO, shutter speed), ranks your lenses for that shot type, and recommends what to buy next. Explanations come from a local Llama 3.2 model, grounded with RAG so it can't make up lens specs.</p>
+          </details>
           <div class="project-stack">
             <span class="stack-tag">PyTorch</span>
             <span class="stack-tag">HuggingFace CLIP</span>
@@ -804,7 +942,12 @@
           </div>
           <h3 class="project-name">ShopSentry</h3>
           <p class="project-tagline">Fraud detection that learns what normal looks like.</p>
-          <p class="project-desc">Catches bots and fraud rings in simulated e-commerce traffic as it happens. Events stream through Redpanda into Spark Structured Streaming, which turns them into 9 session features stored in Feast (Redis for live lookups, Parquet for training). Real fraud teams rarely know which sessions are fraud, so an autoencoder learns normal behavior from just 500 verified-normal sessions, and XGBoost learns from its labels for fast scoring. Every approach is scored against held-out true labels, and an audit of my own pipeline caught duplicate session rows from Spark and a model that was quietly trained on the answers. Both are fixed. Served through FastAPI with an MLflow model registry, Prometheus metrics, and CI.</p>
+          <p class="project-desc">A real-time system that catches bots and fraud rings in simulated online-store traffic as it happens. It learns what normal shoppers look like from a small set of trusted sessions, then flags anything that doesn't fit.</p>
+          <details class="more">
+            <summary><span class="when-closed">Read more ↓</span><span class="when-open">Show less ↑</span></summary>
+            <p class="project-desc">Events stream through Redpanda into Spark Structured Streaming, which turns them into 9 session features stored in Feast (Redis for live lookups, Parquet for training). Real fraud teams rarely know which sessions are fraud, so an autoencoder learns normal behavior from just 500 verified-normal sessions, and XGBoost learns from its labels for fast scoring.</p>
+            <p class="project-desc">Every approach is scored against held-out true labels, and an audit of my own pipeline caught duplicate session rows from Spark and a model that was quietly trained on the answers. Both are fixed. Served through FastAPI with an MLflow model registry, Prometheus metrics, and CI.</p>
+          </details>
           <div class="project-stack">
             <span class="stack-tag">TensorFlow</span>
             <span class="stack-tag">XGBoost</span>
@@ -846,7 +989,11 @@
           </div>
           <h3 class="project-name">Cooked</h3>
           <p class="project-tagline">What can I make with these 4 ingredients?</p>
-          <p class="project-desc">AI-powered recipe discovery app with semantic search over 3k+ recipes using transformer embeddings indexed in Pinecone. Grounded recipe chatbot recommends dishes from ingredients on hand, with responses constrained to the live database and clickable results. LLM APIs (OpenAI, DeepSeek) used to impute structured ingredient metadata across the full dataset.</p>
+          <p class="project-desc">A recipe app that answers "what can I make with what's in my fridge?" On a 4-person capstone team, I led the AI side: search over 3k+ real recipes and a chatbot that only recommends dishes that actually exist.</p>
+          <details class="more">
+            <summary><span class="when-closed">Read more ↓</span><span class="when-open">Show less ↑</span></summary>
+            <p class="project-desc">Search uses transformer embeddings indexed in Pinecone, so it understands what you mean instead of matching exact keywords. The chatbot retrieves real recipes first and answers from them, with clickable results, and can adapt a recipe for dietary needs (gluten free, dairy free, vegetarian) without inventing a new one. LLM APIs (OpenAI, DeepSeek) filled in missing ingredient metadata across the full dataset.</p>
+          </details>
           <div class="project-stack">
             <span class="stack-tag">HuggingFace Transformers</span>
             <span class="stack-tag">Pinecone</span>
@@ -879,7 +1026,7 @@
   <div class="section-inner">
     <p class="section-label fade-in">Contact</p>
     <div class="contact-inner">
-      <h2 class="contact-text fade-in">Let's build something<br>worth <em>shipping.</em></h2>
+      <h2 class="contact-text fade-in">Bring me a problem.<br>I'll solve it, <em>on time.</em></h2>
       <div class="contact-links fade-in">
         <a href="mailto:anhtongxt@gmail.com" class="contact-link">
           <div>
@@ -923,6 +1070,28 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Theme toggle: the button shows the theme you'd switch TO.
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-icon');
+  const label = document.getElementById('theme-label');
+
+  function syncToggle() {
+    const isLight = root.getAttribute('data-theme') === 'light';
+    icon.textContent = isLight ? '☾' : '☀';
+    label.textContent = isLight ? 'Dark' : 'Light';
+    toggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+  }
+
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    syncToggle();
+  });
+
+  syncToggle();
 </script>
 </body>
 </html>
