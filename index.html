@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anh Tong — Data Scientist</title>
+<title>Anh Tong · Data Scientist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -636,7 +636,7 @@
     <div class="hero-left">
       <p class="hero-eyebrow">Data Scientist · Salt Lake City, UT</p>
       <h1 class="hero-title">Anh<br><em>Tong.</em></h1>
-      <p class="hero-desc">I build end-to-end ML systems that actually ship — from real-time fraud detection pipelines to multimodal recommendation engines grounded in real data.</p>
+      <p class="hero-desc">I build data systems end to end: pipelines that validate their own output, models that hold up on data they haven't seen, and the analysis that says whether any of it actually worked.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
         <a href="#contact" class="btn btn-secondary">Get in Touch</a>
@@ -646,8 +646,8 @@
     <div class="hero-right">
       <div class="stat-grid">
         <div class="stat-box">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Production<br>Projects</div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">Projects<br>Shipped</div>
         </div>
         <div class="stat-box">
           <div class="stat-num">22k</div>
@@ -673,10 +673,11 @@
     <h2 class="section-title fade-in">Builder. Problem solver.<br><em style="font-family: var(--serif); font-style: italic; color: var(--accent);">Always finishing.</em></h2>
     <div class="about-grid">
       <div class="about-text fade-in">
-        <p>I'm a recent Data Science graduate from the University of Utah who builds ML systems end-to-end — not just notebooks, but deployed APIs with real latency numbers, experiment tracking, and production monitoring.</p>
-        <p>My projects span <strong>real-time fraud detection</strong> with Spark Streaming and Feast, <strong>multimodal recommendation</strong> with CLIP and pgvector, and <strong>RAG pipelines</strong> grounded in structured data to prevent hallucination.</p>
-        <p>Outside of data, I'm a guitarist, singer, and astrophotographer — which is probably why I ended up building a photography recommendation engine as a portfolio project. I spend weekends hiking, shooting the Milky Way, and occasionally playing fingerpicked guitar at inconvenient hours.</p>
-        <p><strong>Open to opportunities nationwide</strong> — based in Salt Lake City, willing to relocate anywhere.</p>
+        <p>I'm a recent Data Science graduate from the University of Utah who builds data systems end to end, not just notebooks but layered pipelines with real quality checks, deployed APIs with real latency numbers, and experiment tracking.</p>
+        <p>My projects span <strong>program evaluation</strong> on a validated SQL pipeline, <strong>real-time fraud detection</strong> with Spark Streaming and Feast, <strong>multimodal recommendation</strong> with CLIP and pgvector, and <strong>RAG pipelines</strong> grounded in structured data to prevent hallucination.</p>
+        <p>The part I care most about is whether a number is actually true. Most of my time on the no-show project went into the checks that would catch me being wrong, not the model.</p>
+        <p>Outside of data, I'm a guitarist, singer, and astrophotographer, which is probably why I ended up building a photography recommendation engine as a portfolio project. I spend weekends hiking, shooting the Milky Way, and occasionally playing fingerpicked guitar at inconvenient hours.</p>
+        <p><strong>Open to opportunities nationwide.</strong> Based in Salt Lake City, willing to relocate.</p>
       </div>
       <div class="skills-block fade-in">
         <div class="skill-row">
@@ -692,9 +693,9 @@
           </div>
         </div>
         <div class="skill-row">
-          <div class="skill-label">Data & Streaming</div>
+          <div class="skill-label">Data & Pipelines</div>
           <div class="skill-tags">
-            <span class="tag">Spark</span><span class="tag">Redpanda</span><span class="tag">Feast</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span>
+            <span class="tag">SQL</span><span class="tag">DuckDB</span><span class="tag">pandas</span><span class="tag">Spark</span><span class="tag">Redpanda</span><span class="tag">Feast</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span>
           </div>
         </div>
         <div class="skill-row">
@@ -715,9 +716,47 @@
     <h2 class="section-title fade-in">Things I've built<br>and shipped.</h2>
     <div class="projects-list">
 
-      <!-- APATEUR -->
+      <!-- NO-SHOW -->
       <div class="project-card fade-in">
         <div class="project-num">01</div>
+        <div>
+          <div class="project-meta">
+            <span class="project-year">Oct 2026</span>
+            <span class="project-tag">Program Evaluation · Data Engineering · SQL</span>
+          </div>
+          <h3 class="project-name">Appointment Attendance Evaluation</h3>
+          <p class="project-tagline">The reminder texts looked like a failure. They weren't.</p>
+          <p class="project-desc">A clinic's text reminders looked 11 points <em>worse</em> than sending nothing. The reason: the clinic only texts people who book at least 3 days out, and same-day bookers (who can never receive one) almost never miss. They were padding the comparison group. On the eligible group the result reverses to 5 points fewer missed appointments, not 11 more. The pipeline rebuilds from the source CSV in one command across raw, staging, and feature layers, with 16 quality checks that halt the build instead of passing bad data downstream, plus a test suite that corrupts the database 10 different ways to prove each check actually fires. A logistic model then ranks who to call, surfacing no-shows at twice the base rate in the top 5%.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">DuckDB</span>
+            <span class="stack-tag">SQL</span>
+            <span class="stack-tag">pandas</span>
+            <span class="stack-tag">scikit-learn</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/anhtong02/appointment-attendance-evaluation" target="_blank" class="proj-link">GitHub →</a>
+          </div>
+        </div>
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-val">110K</div>
+            <div class="metric-label">Appointments</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">2.0x</div>
+            <div class="metric-label">Lift over random</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">16</div>
+            <div class="metric-label">Quality checks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APATEUR -->
+      <div class="project-card fade-in">
+        <div class="project-num">02</div>
         <div>
           <div class="project-meta">
             <span class="project-year">2026</span>
@@ -725,7 +764,7 @@
           </div>
           <h3 class="project-name">Apateur</h3>
           <p class="project-tagline">For the amateur behind the aperture.</p>
-          <p class="project-desc">Upload a reference photo and your camera gear — Apateur finds visually similar real-photographer shots, returns the settings distributions they actually used (f-stops, ISO, shutter speed), ranks your lenses for that shot type, and recommends what to buy next. RAG-grounded explanations powered by a local Llama 3.2 model prevent hallucinated lens specs.</p>
+          <p class="project-desc">Upload a reference photo and your camera gear, and Apateur finds visually similar real-photographer shots, returns the settings distributions they actually used (f-stops, ISO, shutter speed), ranks your lenses for that shot type, and recommends what to buy next. RAG-grounded explanations powered by a local Llama 3.2 model prevent hallucinated lens specs.</p>
           <div class="project-stack">
             <span class="stack-tag">PyTorch</span>
             <span class="stack-tag">HuggingFace CLIP</span>
@@ -757,7 +796,7 @@
 
       <!-- SHOPSENTRY -->
       <div class="project-card fade-in">
-        <div class="project-num">02</div>
+        <div class="project-num">03</div>
         <div>
           <div class="project-meta">
             <span class="project-year">Mar – Apr 2026</span>
@@ -765,7 +804,7 @@
           </div>
           <h3 class="project-name">ShopSentry</h3>
           <p class="project-tagline">Real-time fraud detection that actually runs in production.</p>
-          <p class="project-desc">End-to-end ML platform for real-time anomaly detection — Redpanda event streaming, Spark Structured Streaming with 9 windowed features, Feast feature store with Redis-backed online serving, and a FastAPI prediction API. Compared 5 pseudo-labeling strategies with stratified 5-fold CV. 100% bot and fraud recall. Load-tested to 30k+ requests.</p>
+          <p class="project-desc">End-to-end ML platform for real-time anomaly detection: Redpanda event streaming, Spark Structured Streaming with 9 windowed features, Feast feature store with Redis-backed online serving, and a FastAPI prediction API. Compared 5 pseudo-labeling strategies with stratified 5-fold CV. 100% bot and fraud recall. Load-tested to 30k+ requests.</p>
           <div class="project-stack">
             <span class="stack-tag">PyTorch</span>
             <span class="stack-tag">TensorFlow</span>
@@ -799,7 +838,7 @@
 
       <!-- COOKED -->
       <div class="project-card fade-in">
-        <div class="project-num">03</div>
+        <div class="project-num">04</div>
         <div>
           <div class="project-meta">
             <span class="project-year">Jan – Dec 2025</span>
@@ -807,7 +846,7 @@
           </div>
           <h3 class="project-name">Cooked</h3>
           <p class="project-tagline">What can I make with these 4 ingredients?</p>
-          <p class="project-desc">AI-powered recipe discovery app with semantic search over 3k+ recipes using transformer embeddings indexed in Pinecone. Grounded recipe chatbot recommends dishes from ingredients on hand — responses constrained to the live database with clickable results. LLM APIs (OpenAI, DeepSeek) used to impute structured ingredient metadata across the full dataset.</p>
+          <p class="project-desc">AI-powered recipe discovery app with semantic search over 3k+ recipes using transformer embeddings indexed in Pinecone. Grounded recipe chatbot recommends dishes from ingredients on hand, with responses constrained to the live database and clickable results. LLM APIs (OpenAI, DeepSeek) used to impute structured ingredient metadata across the full dataset.</p>
           <div class="project-stack">
             <span class="stack-tag">HuggingFace Transformers</span>
             <span class="stack-tag">Pinecone</span>
@@ -871,7 +910,7 @@
 <!-- FOOTER -->
 <footer>
   <p>Anh Tong · Data Scientist · Salt Lake City, UT</p>
-  <p>Built with HTML — no frameworks needed.</p>
+  <p>Built with HTML. No frameworks needed.</p>
 </footer>
 
 <script>
