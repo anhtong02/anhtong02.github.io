@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anh Tong · Data Scientist</title>
+<title>Anh (Armes) Tong · Data Scientist</title>
 <script>
   /* Set theme before the page paints so there's no flash.
      Saved choice wins; otherwise follow the system setting. */
@@ -87,6 +87,18 @@
     background: linear-gradient(var(--accent), var(--accent2)) !important;
   }
   .metric-val { color: var(--accent3) !important; }
+
+  /* ── PREFERRED NAME ── */
+  .hero-aka {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: -0.5rem 0 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+  .hero-aka strong { color: var(--accent2); font-weight: 500; }
 
   /* ── READ MORE ── */
   .more summary {
@@ -764,6 +776,7 @@
     <div class="hero-left">
       <p class="hero-eyebrow">Data Scientist · Salt Lake City, UT</p>
       <h1 class="hero-title">Anh<br><em>Tong.</em></h1>
+      <p class="hero-aka">Goes by <strong>Armes</strong> <span>(say "AR-mez")</span></p>
       <p class="hero-desc">I build data systems end to end: pipelines that validate their own output, models that hold up on data they haven't seen, and the analysis that says whether any of it actually worked.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
