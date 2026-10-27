@@ -799,15 +799,15 @@
         <div class="project-num">03</div>
         <div>
           <div class="project-meta">
-            <span class="project-year">Mar – Apr 2026</span>
+            <span class="project-year">Mar – Oct 2026</span>
             <span class="project-tag">Real-Time · Fraud Detection · MLOps</span>
           </div>
           <h3 class="project-name">ShopSentry</h3>
-          <p class="project-tagline">Real-time fraud detection that actually runs in production.</p>
-          <p class="project-desc">End-to-end ML platform for real-time anomaly detection: Redpanda event streaming, Spark Structured Streaming with 9 windowed features, Feast feature store with Redis-backed online serving, and a FastAPI prediction API. Compared 5 pseudo-labeling strategies with stratified 5-fold CV. 100% bot and fraud recall. Load-tested to 30k+ requests.</p>
+          <p class="project-tagline">Fraud detection that learns what normal looks like.</p>
+          <p class="project-desc">Catches bots and fraud rings in simulated e-commerce traffic as it happens. Events stream through Redpanda into Spark Structured Streaming, which turns them into 9 session features stored in Feast (Redis for live lookups, Parquet for training). Real fraud teams rarely know which sessions are fraud, so an autoencoder learns normal behavior from just 500 verified-normal sessions, and XGBoost learns from its labels for fast scoring. Every approach is scored against held-out true labels, and an audit of my own pipeline caught duplicate session rows from Spark and a model that was quietly trained on the answers. Both are fixed. Served through FastAPI with an MLflow model registry, Prometheus metrics, and CI.</p>
           <div class="project-stack">
-            <span class="stack-tag">PyTorch</span>
             <span class="stack-tag">TensorFlow</span>
+            <span class="stack-tag">XGBoost</span>
             <span class="stack-tag">Spark Streaming</span>
             <span class="stack-tag">Redpanda</span>
             <span class="stack-tag">Feast</span>
@@ -822,15 +822,15 @@
         </div>
         <div class="project-metrics">
           <div class="metric">
-            <div class="metric-val">0.84</div>
+            <div class="metric-val">0.88</div>
             <div class="metric-label">F1 Score</div>
           </div>
           <div class="metric">
             <div class="metric-val">100%</div>
-            <div class="metric-label">Fraud recall</div>
+            <div class="metric-label">Bot &amp; fraud recall</div>
           </div>
           <div class="metric">
-            <div class="metric-val">32ms</div>
+            <div class="metric-val">13ms</div>
             <div class="metric-label">p50 latency</div>
           </div>
         </div>
